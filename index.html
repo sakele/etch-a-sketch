@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <button id="btn">New Grid</button>
     <div id="container"></div>
     <script>
         const container = document.querySelector('#container');
@@ -39,7 +40,27 @@
                 }
             });
         }
+        function deleteGrid() {
+            let child = container.lastChild;
+            while (child) {
+                container.removeChild(child);
+                child = container.lastElementChild;
+            }
+        }
+        function newGrid() {
+            size = prompt('How big do you want this new grid to be? (Maximum 100 x 100)')
+            size = Number(size);
+            if (!size || size <= 0) {
+                return;
+            }
+            if (size > 100) {
+                size = 100;
+            }
+            deleteGrid();
+            makeGrid(size);
+        }
         makeGrid(16);
+        btn.addEventListener('click', newGrid);
     </script>
 </body>
 </html>
