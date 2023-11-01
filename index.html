@@ -8,6 +8,35 @@
 </head>
 <body>
     <div id="container"></div>
-    <script></script>
+    <script>
+        const container = document.querySelector('#container');
+        function addRow() {
+            const row = document.createElement('div');
+            row.classList.add('row');
+            container.appendChild(row);
+        }
+        function addSquare(row) {
+            const square = document.createElement('div');
+            square.classList.add('square');
+            row.appendChild(square);
+        }
+
+        function makeGrid(size) {
+            let i = 1
+            while (i <= size) {
+                addRow();
+                i++;
+            }
+            const rows = document.querySelectorAll('.row');
+            rows.forEach(function (row) {
+                let i = 1;
+                while (i <= size) {
+                    addSquare(row);
+                    i++;
+                }
+            });
+        }
+        makeGrid(16);
+    </script>
 </body>
 </html>
