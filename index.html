@@ -25,7 +25,28 @@
             let r = getRandomInt(0,255);
             let g = getRandomInt(0, 255);
             let b = getRandomInt(0, 255);
-            return `rgb(${r}, ${g}, ${b})`
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+        function darken(rgb) {
+            rgb = rgb.substring(rgb.indexOf("(") + 1);
+            rgb = rgb.substring(0, rgb.indexOf(")"));
+            let array = rgb.split(", ");
+            let r = Number(array[0]);
+            let g = Number(array[1]);
+            let b = Number(array[2]);
+            r -= 25;
+            g -= 25;
+            b -= 25;
+            if (r < 0) {
+                r = 0;
+            }
+            if (g < 0) {
+                g = 0;
+            }
+            if (b < 0) {
+                b = 0;
+            }
+            return `rgb(${r}, ${g}, ${b})`;
         }
         function addSquare(row) {
             const square = document.createElement('div');
@@ -34,7 +55,11 @@
                 if (!e.target.style.background) {
                     let color = getRandomColor();
                     e.target.style.background = color;
-                } //else if (e.target.style.background === 'black')
+                } else if (!(e.target.style.background === 'rgb(0, 0, 0)')) {
+                    let color = e.target.style.background;
+                    color = darken(color);
+                    e.target.style.background = color;
+                }
             });
             row.appendChild(square);
         }
